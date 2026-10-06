@@ -1,0 +1,10 @@
+﻿{
+  "name": "scMetaBasin",
+  "version": "0.1.0",
+  "status": "V36_REGRESSION_VALIDATED",
+  "ground_truth_used_in_algorithm": false,
+  "regression_datasets": 5,
+  "regression_passed": 5,
+  "final_partition_ARI_old_vs_new": 1.0,
+  "notes": "Frozen V2 selector and V1 fallback reproduced exactly."
+}
