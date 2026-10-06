@@ -36,8 +36,9 @@ This creates a small synthetic software input and verifies the resulting
 30 rows, 3 clusters, 3 local basins, and 1 meta-basin. It is an execution demo,
 not paper evidence. The directory must be new. Outputs are listed below.
 Paper-specific commands are provided separately in the
-[frozen run guide](../scMetaBasin_reproduction_notes/FROZEN_RUNS.md).
-Extract the companion reproduction notes beside this source directory.
+[frozen run guide](reproduction_notes/FROZEN_RUNS.md).
+The companion reproduction notes are included in reproduction_notes/.
+Frozen representation inputs are distributed separately.
 
 ## Input
 
@@ -126,7 +127,7 @@ Six interface tests and the quickstart demo have passed in the locally tested
 environment. PROVENANCE.json records the core's origin and the single-basin
 silhouette guard; selection rules and default parameters are unchanged.
 Paper-specific verification scope is documented in the separate
-[reproduction notes](../scMetaBasin_reproduction_notes/VERIFICATION_SCOPE.md).
+[reproduction notes](reproduction_notes/VERIFICATION_SCOPE.md).
 MANIFEST.sha256 records the files in this source archive.
 
 ## License
