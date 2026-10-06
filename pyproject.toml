@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scMetaBasin"
+version = "0.1.0"
+description = "Solution-landscape meta-basin consensus for known-K single-cell clustering"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.21", "pandas>=1.4", "scipy>=1.9", "scikit-learn>=1.1"]
+
+[project.scripts]
+scmetabasin = "scmetabasin.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+scmetabasin = ["VERSION.json"]

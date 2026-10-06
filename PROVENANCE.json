@@ -1,0 +1,45 @@
+{
+  "algorithm": "scMetaBasin v0.1.0",
+  "origin": "Previously cleaned scGmae/scmetabasin module and reviewer code archive",
+  "changes": "Formatting and parameterized CLI; one guarded silhouette expression in single-basin fallback. Selection rules and default parameters preserved.",
+  "source_files": [
+    {
+      "file": "__init__.py",
+      "source_sha256": "13e76480ee5c231e8985bbd886584293050f0b445b6835281081125cbd2b64d0",
+      "release_sha256": "293d37f46912f7c81d6737ba0968dc227e129b05837d2f14e7fb4e827a94daea",
+      "executable_AST_identical": true,
+      "change": "Formatting only",
+      "release_lf_sha256": "c5bbfb0de1e510a3046526d6e02403518557a50926841a0cc1ceffb8f254fd2c"
+    },
+    {
+      "file": "clusterer.py",
+      "source_sha256": "39ba7cadf753fa0ffde827b22b82e409a51c6f233f2ef30ce9624c9ef956ed1a",
+      "release_sha256": "3d00d3b53dc077f37dba47ac9844ed83823cf3cfda5ca035281c69eac2c75f21",
+      "executable_AST_identical": false,
+      "change": "Undefined single-basin fallback silhouette becomes NaN",
+      "release_lf_sha256": "bc8457d8936ebc575c03efb8a1060bdecc6b85edeac46c9d3c2a8d736dbc11d7"
+    },
+    {
+      "file": "io.py",
+      "source_sha256": "d41784b49011046a551464955bddf747172fc5f219f98b29e3832acb7d71d51f",
+      "release_sha256": "82ad137c8925a99677977a44b1450f06641ae8dbc614f5546867c0aee79ad6ee",
+      "executable_AST_identical": true,
+      "change": "Formatting only",
+      "release_lf_sha256": "343794ab4106653b2de156867c2e6ae04ad7f5a4c5eead01f745d77f76d64883"
+    },
+    {
+      "file": "result.py",
+      "source_sha256": "8b161132f0aeb457317eaf19f814f212ad778f109570a4e62f8f480c41612557",
+      "release_sha256": "a530c9ad53e5ed6e933d271c2b2c9f0730ceacbb84565f3520639c52ff0968aa",
+      "executable_AST_identical": true,
+      "change": "Formatting only",
+      "release_lf_sha256": "799a3d8c5acfd7cf7a6c9bc18b7d6eeb0ecf5e64dacdc26a4f41b144735bd916"
+    }
+  ],
+  "license": {
+    "spdx": "MIT",
+    "selected_by": "Author instruction",
+    "date": "2026-10-06",
+    "scope": "This core release; separate third-party and scientific materials retain their terms."
+  }
+}
