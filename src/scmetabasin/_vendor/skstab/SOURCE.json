@@ -1,0 +1,24 @@
+{
+  "repository": "https://github.com/FlorentF9/skstab",
+  "commit": "5ce9a2ca270375c81c5ff82401356600c1bfedcf",
+  "files_sha256": {
+    "LICENSE": "71c7df668ca8a4a02ede890a25c86094332854ebdc770257ca76a9b768045830",
+    "README.md": "57c2b2f7cc35d672cd96f2d1b748a2aaa61e8c3eef7484c08a45aaba8c604215",
+    "skstab/__init__.py": "e8673f256e15a271a4b6476eb7b481c94141d64394830b9e583bd187c3c19e1a",
+    "skstab/__version__.py": "253027094c7f27e00873e2dba56647cb096cb60da4a31f4465408bfdb887f213",
+    "skstab/datasets.py": "323080844965ae4d0dbef566c8cf3fda68529eab5fc8d0883b8b53eec0e47cd2",
+    "skstab/metrics.py": "3211cf06d5727080d0f8cb3bca5ffd501004d17e41509b13401013a581060248",
+    "skstab/perturbation.py": "b485cca3c0f0012549e541cb301130b6fd54176f67153dabd8c461cd8a6e71a6",
+    "skstab/stability.py": "770d5fdc17afc8e90000b0386aa0e847ca62757dc3fb24de522538675c9d4c0e"
+  },
+  "license": "MIT",
+  "upstream_modified": true,
+  "patch_description": "Two absolute skstab imports in stability.py changed to relative imports for private packaging only.",
+  "bundled_sha256": {
+    "__init__.py": "17305800bfeef1eeeff5f6854ca972a5b60708ea2c5673ba2be7581cd4be0c18",
+    "__version__.py": "ebe2d045abecc578e291dc8593d7a5be5832528f2f3b3695e2dba6c1f9d8b629",
+    "metrics.py": "5c2155d9a232ab90e993e33460fff9cc968d5d296a5f021f055663c726e4ceff",
+    "perturbation.py": "2d63ca42adb6e877f76d977ae9e750783853edc89756f97039883f88de88a46f",
+    "stability.py": "50acd062263c0905228f0e595ad5f5a92d8b00f2e4d102297a7bb42aa5276e5d"
+  }
+}

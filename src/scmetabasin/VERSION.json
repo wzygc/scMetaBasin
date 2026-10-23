@@ -1,10 +1,21 @@
-﻿{
+{
   "name": "scMetaBasin",
-  "version": "0.1.0",
-  "status": "V36_REGRESSION_VALIDATED",
-  "ground_truth_used_in_algorithm": false,
-  "regression_datasets": 5,
-  "regression_passed": 5,
-  "final_partition_ARI_old_vs_new": 1.0,
-  "notes": "Frozen V2 selector and V1 fallback reproduced exactly."
+  "version": "0.2.0",
+  "date": "2026-10-23",
+  "status": "OPTIONAL_K_PACKAGE_VERIFIED",
+  "interface_tests": 19,
+  "automatic_K_status": "experimental",
+  "ground_truth_used_in_downstream_algorithm": false,
+  "paper_defaults": {
+    "meta_threshold": 0.85,
+    "prevalence_weight": 0.05
+  },
+  "verification": {
+    "installed_wheel_auto": "Fresh synthetic three-cluster input; estimated and realized K=3.",
+    "automatic_path_comparison": "Fresh installed-wheel path prefix equals prior prototype exactly.",
+    "manual_regression": "Synthetic labels match v0.1.1; real Enge K=6 labels match saved labels exactly.",
+    "core_scientific_body": "AST-identical to v0.1.1; no ranking-policy replacement.",
+    "directory_input": "NPY bank and optional cell IDs verified."
+  },
+  "scope_limit": "Existing dependency environment; no fresh upstream training, clean dependency installation or broad automatic-K biological validation."
 }

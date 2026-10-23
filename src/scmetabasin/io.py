@@ -97,3 +97,20 @@ def save_representations_npz(path, representations, cell_ids=None):
     path.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(path, **payload)
     return path
+
+
+def load_representations(path):
+    """Load a representation NPZ or a directory of representation NPY files."""
+    path = Path(path).expanduser().resolve()
+    if not path.is_dir():
+        return load_representations_npz(path)
+    bank = {p.stem: np.load(p, allow_pickle=False)
+            for p in sorted(path.glob('*.npy')) if p.name != 'cell_ids.npy'}
+    n_cells = validate_representations(bank)
+    cell_ids = None
+    if (path / 'cell_ids.npy').exists():
+        cell_ids = np.load(path / 'cell_ids.npy', allow_pickle=False)
+        if cell_ids.ndim != 1 or len(cell_ids) != n_cells:
+            raise ValueError('cell_ids must be 1-D and match representation rows')
+        cell_ids = cell_ids.astype(str)
+    return bank, cell_ids

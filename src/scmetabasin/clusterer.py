@@ -192,7 +192,7 @@ def balanced_representatives(component, nodes, M):
 class scMetaBasin:
     """
     scMetaBasin: solution-landscape meta-basin consensus
-    for model-agnostic known-K single-cell clustering.
+    for model-agnostic single-cell clustering with optional K.
 
     Input
     -----
@@ -209,7 +209,7 @@ class scMetaBasin:
 
     score:
         CrossRepMean
-        + 0.05 * MeanBasinFraction
+        + prevalence_weight * MeanBasinFraction (paper default: 0.05)
 
     If no V2 eligible meta-basin:
         Frozen V1 fallback:
@@ -218,14 +218,26 @@ class scMetaBasin:
     Ground truth is never used.
     """
 
-    def __init__(self, n_clusters, seeds=range(100), max_basins=5, min_basin_size=5, basin_linkage='average', meta_threshold=0.85, meta_linkage='average'):
-        self.n_clusters = int(n_clusters)
+    def __init__(self, n_clusters=None, seeds=range(100), max_basins=5, min_basin_size=5, basin_linkage='average', meta_threshold=0.85, meta_linkage='average', prevalence_weight=0.05, auto_k_workers=5):
+        if n_clusters is not None and (isinstance(n_clusters, (bool, np.bool_)) or not isinstance(n_clusters, (int, np.integer)) or n_clusters < 2):
+            raise ValueError('n_clusters must be None or an integer >=2.')
+        if isinstance(auto_k_workers, bool) or not isinstance(auto_k_workers, int) or auto_k_workers < 1:
+            raise ValueError('auto_k_workers must be a positive integer.')
+        self.requested_n_clusters = None if n_clusters is None else int(n_clusters)
+        self.n_clusters = self.requested_n_clusters
+        self.auto_k_workers = auto_k_workers
+        self.estimated_K_ = None
+        self.realized_K_ = None
+        self.status_ = 'not_fitted'
         self.seeds = np.asarray(list(seeds), dtype=int)
         self.max_basins = int(max_basins)
         self.min_basin_size = int(min_basin_size)
         self.basin_linkage = basin_linkage
         self.meta_threshold = float(meta_threshold)
         self.meta_linkage = meta_linkage
+        self.prevalence_weight = float(prevalence_weight)
+        if not np.isfinite(self.prevalence_weight) or self.prevalence_weight < 0:
+            raise ValueError('prevalence_weight must be finite and non-negative.')
 
     def _solution_landscape(self, X):
         preds = []
@@ -235,6 +247,49 @@ class scMetaBasin:
         return np.stack(preds)
 
     def fit_predict(self, representations: Dict[str, np.ndarray]):
+        from .io import validate_representations
+        n_cells = validate_representations(representations)
+        for name in ['labels_', 'basin_table_', 'meta_table_', 'meta_labels_', 'selected_meta_',
+                     'selected_meta_id_', 'selection_mode_', 'auto_k_info_', 'auto_k_ranking_',
+                     'auto_k_windows_', 'auto_k_paths_', 'auto_k_between_']:
+            if hasattr(self, name):
+                delattr(self, name)
+        self.estimated_K_ = None
+        self.realized_K_ = None
+        self.n_clusters = self.requested_n_clusters
+        self.k_mode_ = 'auto' if self.requested_n_clusters is None else 'manual'
+        self.status_ = 'fitting'
+        if self.requested_n_clusters is None:
+            from .automatic import estimate_k
+            decision = estimate_k(representations, workers=self.auto_k_workers)
+            self.n_clusters = decision['target_K']
+            self.estimated_K_ = self.n_clusters
+            self.auto_k_info_ = decision['info']
+            self.auto_k_ranking_ = decision['ranking']
+            self.auto_k_windows_ = decision['windows']
+            self.auto_k_paths_ = decision['paths']
+            self.auto_k_between_ = decision['between']
+            if self.n_clusters is None:
+                self.labels_ = None
+                self.status_ = 'no_supported_split'
+                return None
+        elif self.n_clusters > n_cells:
+            raise ValueError('n_clusters exceeds the number of cells.')
+        try:
+            labels = self._fit_known_k(representations)
+        except RuntimeError as error:
+            self.status_ = 'failed'
+            if str(error) == 'No selectable meta-basin with >=2 representations.':
+                self.status_ = 'no_supported_state'
+                if self.requested_n_clusters is None:
+                    self.labels_ = None
+                    return None
+            raise
+        self.realized_K_ = int(len(np.unique(labels)))
+        self.status_ = 'completed' if self.realized_K_ == self.n_clusters else 'completed_K_mismatch'
+        return labels
+
+    def _fit_known_k(self, representations: Dict[str, np.ndarray]):
         if len(representations) < 2:
             raise ValueError('MetaBasin requires at least two representations.')
         rep_names = sorted(representations)
@@ -280,7 +335,7 @@ class scMetaBasin:
                     pair_values.append(float(node_M[i, j]))
             crossrep_mean = float(np.mean(pair_values)) if pair_values else np.nan
             mean_basin_fraction = float(np.mean([nodes[i].basin_fraction for i in balanced]))
-            frozen_score = crossrep_mean + 0.05 * mean_basin_fraction if np.isfinite(crossrep_mean) else np.nan
+            frozen_score = crossrep_mean + self.prevalence_weight * mean_basin_fraction if np.isfinite(crossrep_mean) else np.nan
             if candidate_count >= 2:
                 parts = np.stack([nodes[i].labels for i in balanced])
                 meta_labels[meta_id] = consensus_partition(parts, known_k=self.n_clusters, method=self.meta_linkage)

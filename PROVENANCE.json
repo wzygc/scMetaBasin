@@ -1,45 +1,45 @@
 {
-  "algorithm": "scMetaBasin v0.1.0",
-  "origin": "Previously cleaned scGmae/scmetabasin module and reviewer code archive",
-  "changes": "Formatting and parameterized CLI; one guarded silhouette expression in single-basin fallback. Selection rules and default parameters preserved.",
-  "source_files": [
-    {
-      "file": "__init__.py",
-      "source_sha256": "13e76480ee5c231e8985bbd886584293050f0b445b6835281081125cbd2b64d0",
-      "release_sha256": "293d37f46912f7c81d6737ba0968dc227e129b05837d2f14e7fb4e827a94daea",
-      "executable_AST_identical": true,
-      "change": "Formatting only",
-      "release_lf_sha256": "c5bbfb0de1e510a3046526d6e02403518557a50926841a0cc1ceffb8f254fd2c"
-    },
-    {
-      "file": "clusterer.py",
-      "source_sha256": "39ba7cadf753fa0ffde827b22b82e409a51c6f233f2ef30ce9624c9ef956ed1a",
-      "release_sha256": "3d00d3b53dc077f37dba47ac9844ed83823cf3cfda5ca035281c69eac2c75f21",
-      "executable_AST_identical": false,
-      "change": "Undefined single-basin fallback silhouette becomes NaN",
-      "release_lf_sha256": "bc8457d8936ebc575c03efb8a1060bdecc6b85edeac46c9d3c2a8d736dbc11d7"
-    },
-    {
-      "file": "io.py",
-      "source_sha256": "d41784b49011046a551464955bddf747172fc5f219f98b29e3832acb7d71d51f",
-      "release_sha256": "82ad137c8925a99677977a44b1450f06641ae8dbc614f5546867c0aee79ad6ee",
-      "executable_AST_identical": true,
-      "change": "Formatting only",
-      "release_lf_sha256": "343794ab4106653b2de156867c2e6ae04ad7f5a4c5eead01f745d77f76d64883"
-    },
-    {
-      "file": "result.py",
-      "source_sha256": "8b161132f0aeb457317eaf19f814f212ad778f109570a4e62f8f480c41612557",
-      "release_sha256": "a530c9ad53e5ed6e933d271c2b2c9f0730ceacbb84565f3520639c52ff0968aa",
-      "executable_AST_identical": true,
-      "change": "Formatting only",
-      "release_lf_sha256": "799a3d8c5acfd7cf7a6c9bc18b7d6eeb0ecf5e64dacdc26a4f41b144735bd916"
-    }
-  ],
-  "license": {
-    "spdx": "MIT",
-    "selected_by": "Author instruction",
-    "date": "2026-10-06",
-    "scope": "This core release; separate third-party and scientific materials retain their terms."
-  }
+  "algorithm": "scMetaBasin",
+  "version": "0.2.0",
+  "baseline": "../scMetaBasin_v0.1.1",
+  "baseline_file_hashes": {
+    ".gitignore": "0c87a9c7b5e7b2cb857a577118f93c75a65b1a38b6d76f8124923c7614ad261b",
+    "examples/quickstart.py": "e653260006b2192c447bb14689113695544ce5d63ce94bfed9b58d9f45169074",
+    "LICENSE": "79a54b28dd26b5d8bbd03a1795c799fdac560d9af5c7e03f7bae57a3c0840518",
+    "LICENSE_STATUS.md": "6776262c9a56cbf7016dd0b9cfdf111bfd09ae68600e83aa2215c6908edec7ae",
+    "MANIFEST.sha256": "6a287f9a0ce92cf0d299363abc57faa7fc44046163a24830e2f733e3aba8992f",
+    "PROVENANCE.json": "99bee6471c2ca1f575da0183d253188c24033c5780dd3fcce7844931807b6fd3",
+    "pyproject.toml": "dd480762d7e2d2114a9b08690562eee6044e9b6958bfaf395944e1914ad58d92",
+    "README.md": "6f430d3e974f0b53bb4942f36774728022e54c71f13f717fefe0e23b87cfaa44",
+    "requirements-tested.txt": "5a9e3fd269c02effa5feb4d9f24c4f311aaf787b3083fc00d8cbb1c85d6a0b3e",
+    "src/scmetabasin/__init__.py": "4597a2d6ef52ff7f7ec7da8c33f5d43d4e0c4760717e8823519bfd031280f678",
+    "src/scmetabasin/__main__.py": "3129adff95e0f38b87ab34cddfc27082c7892bcaec267ff5d40f160fdf55b44a",
+    "src/scmetabasin/cli.py": "727096e221e77080a6dda6fe60f49c25776f1de8383bea691f1070fa5f7dbe36",
+    "src/scmetabasin/clusterer.py": "f68371d8d470705f2be6a56494ca4e1044bfe22f6bdfb54f6cf2248003bf2e48",
+    "src/scmetabasin/io.py": "82ad137c8925a99677977a44b1450f06641ae8dbc614f5546867c0aee79ad6ee",
+    "src/scmetabasin/result.py": "ee4756a2a35f150e0baaa998485e08671e6f6b0af7d78d92e2a45d9df482dd94",
+    "src/scmetabasin/VERSION.json": "c58c4899015c729547acc3e36a113f3ebda4e090144789f57827f159c4da113f",
+    "tests/test_interface.py": "b33c533f8158a54d28631afb90dbfabcfa75329dff5d189eac64d0296cfb2014"
+  },
+  "change": "Make K optional in Python and CLI; package the supported-area v3 estimator and MIT skstab snapshot; preserve adjustable core parameters.",
+  "selection_defaults_unchanged": true,
+  "known_K_core_scientific_body_unchanged": true,
+  "scientific_data_modified": false,
+  "automatic_K": {
+    "status": "experimental development extension",
+    "rule": "supported-area v3, two perturbation batches, conservative positive excess over K=1",
+    "skstab_commit": "5ce9a2ca270375c81c5ff82401356600c1bfedcf",
+    "vendor_modifications": "Two package-relative imports only; see private vendor SOURCE.json.",
+    "research_directory_dependency": false,
+    "alternative_core_ranking_policies_integrated": false
+  },
+  "verification": {
+    "installed_wheel_auto": "Fresh synthetic three-cluster input; estimated and realized K=3.",
+    "automatic_path_comparison": "Fresh installed-wheel path prefix equals prior prototype exactly.",
+    "manual_regression": "Synthetic labels match v0.1.1; real Enge K=6 labels match saved labels exactly.",
+    "core_scientific_body": "AST-identical to v0.1.1; no ranking-policy replacement.",
+    "directory_input": "NPY bank and optional cell IDs verified."
+  },
+  "scope_limit": "Existing dependency environment; no fresh upstream training, clean dependency installation or broad automatic-K biological validation.",
+  "license": "MIT; private MIT skstab notice retained"
 }
