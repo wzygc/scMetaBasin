@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scMetaBasin"
-version = "0.2.0"
+version = "0.3.0"
 description = "Solution-landscape meta-basin consensus with optional automatic K"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -13,9 +13,13 @@ dependencies = ["numpy>=1.21", "pandas>=1.4", "scipy>=1.9", "scikit-learn>=1.1",
 
 [project.scripts]
 scmetabasin = "scmetabasin.cli:main"
+scmetabasin-build-fiveview = "scmetabasin.fiveview:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 scmetabasin = ["VERSION.json", "_vendor/skstab/LICENSE", "_vendor/skstab/SOURCE.json"]
+
+[project.optional-dependencies]
+fiveview = ["torch>=2.0"]

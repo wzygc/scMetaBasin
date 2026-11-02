@@ -12,7 +12,7 @@ import numpy as np
 from scmetabasin.cli import main, make_parser, parse_seeds
 from scmetabasin.io import load_representations_npz
 from scmetabasin.clusterer import discover_basins
-from scmetabasin import scMetaBasin
+from scmetabasin import __version__, scMetaBasin
 
 
 class InterfaceTests(unittest.TestCase):
@@ -112,6 +112,7 @@ class InterfaceTests(unittest.TestCase):
                       "--seeds", "0:6", "--meta-threshold", "0.8"])
             summary = json.loads((output/"scmetabasin_summary.json").read_text())
             self.assertEqual(summary["realized_K"], 3)
+            self.assertEqual(summary["version"], __version__)
             self.assertEqual(summary["parameters"]["seeds"], list(range(6)))
             self.assertEqual(summary["parameters"]["meta_threshold"], 0.8)
             self.assertFalse(summary["frozen_default_profile"])

@@ -1,9 +1,9 @@
 {
   "name": "scMetaBasin",
-  "version": "0.2.0",
-  "date": "2026-10-23",
-  "status": "OPTIONAL_K_PACKAGE_VERIFIED",
-  "interface_tests": 19,
+  "version": "0.3.0",
+  "date": "2026-11-01",
+  "status": "INDEPENDENT_FIVEVIEW_VERIFIED",
+  "interface_tests": 24,
   "automatic_K_status": "experimental",
   "ground_truth_used_in_downstream_algorithm": false,
   "paper_defaults": {
@@ -11,11 +11,18 @@
     "prevalence_weight": 0.05
   },
   "verification": {
-    "installed_wheel_auto": "Fresh synthetic three-cluster input; estimated and realized K=3.",
-    "automatic_path_comparison": "Fresh installed-wheel path prefix equals prior prototype exactly.",
-    "manual_regression": "Synthetic labels match v0.1.1; real Enge K=6 labels match saved labels exactly.",
-    "core_scientific_body": "AST-identical to v0.1.1; no ranking-policy replacement.",
-    "directory_input": "NPY bank and optional cell IDs verified."
+    "unit_tests_passed": 24,
+    "known_K_core_unchanged_from": "0.2.0",
+    "legacy_builder_views_exact": 25,
+    "rebuilt_fixed_K_final_partitions_exact": 5,
+    "rebuilt_fixed_K_meta_tables_exact": 5,
+    "installed_fiveview_cli": "Verified on original worm expression and supplied embedding; no encoder or legacy module loaded."
   },
-  "scope_limit": "Existing dependency environment; no fresh upstream training, clean dependency installation or broad automatic-K biological validation."
+  "scope_limit": "Local tested environment and original supplied embeddings; no upstream encoder training or broad biological automatic-K validation. Some local-basin diagnostic values differ after view regeneration.",
+  "fiveview": {
+    "requires_encoder": false,
+    "requires_expression_preprocessing": true,
+    "paper_parameters": "explicit separate arrays",
+    "default_attention_negative_slope": 0.3
+  }
 }

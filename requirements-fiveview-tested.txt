@@ -1,0 +1,2 @@
+-r requirements-tested.txt
+torch==2.0.1

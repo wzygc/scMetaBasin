@@ -4,6 +4,7 @@ import hashlib
 import json
 import numpy as np
 import pandas as pd
+from . import __version__
 
 def sha256_file(path):
     path = Path(path)
@@ -65,7 +66,7 @@ def save_scmetabasin_results(clusterer, output_dir, cell_ids=None, input_path=No
     selected_obj = {'selection_mode': clusterer.selection_mode_, 'selected_meta_id': int(clusterer.selected_meta_id_), 'selected_meta': json_safe(clusterer.selected_meta_)}
     selected_path.write_text(json.dumps(selected_obj, indent=2, ensure_ascii=False, allow_nan=False), encoding='utf-8')
     unique, counts = np.unique(labels, return_counts=True)
-    summary = {'algorithm': 'scMetaBasin', 'version': '0.2.0', 'known_K': clusterer.requested_n_clusters,
+    summary = {'algorithm': 'scMetaBasin', 'version': __version__, 'known_K': clusterer.requested_n_clusters,
                'estimated_K': clusterer.estimated_K_, 'target_K': int(clusterer.n_clusters),
                'k_mode': clusterer.k_mode_, 'status': clusterer.status_,
                'n_cells': int(n), 'realized_K': int(len(unique)), 'selection_mode': str(clusterer.selection_mode_), 'selected_meta_id': int(clusterer.selected_meta_id_), 'n_discovered_basins': int(len(clusterer.basin_table_)), 'n_meta_basins': int(len(clusterer.meta_table_)), 'cluster_sizes': {str(int(k)): int(v) for k, v in zip(unique, counts)}, 'ground_truth_used': False,
